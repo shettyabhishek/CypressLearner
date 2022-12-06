@@ -21,19 +21,15 @@ describe('Data driven functionality spec', () => {
       //adding the text to the fields and validating
       cy.get('#FirstName').type(registrationData.firstname);
       cy.get("[data-valmsg-for='FirstName']").should("have.class","field-validation-valid");
-      cy.get('#LastName').type("User");
+      cy.get('#LastName').type(registrationData.lastname);
       cy.get("[data-valmsg-for='LastName']").should("have.class","field-validation-valid");
-      cy.get('#Email').type("somemail");
-      cy.get("[data-valmsg-for='Email']").should("have.class","field-validation-error");
-      cy.get('#Email').type("somemail@test.com");
+      //cy.get('#Email').type(registrationData.email);
+      //cy.get("[data-valmsg-for='Email']").should("have.class","field-validation-error");
+      cy.get('#Email').type(registrationData.email);
       cy.get("[data-valmsg-for='Email']").should("have.class","field-validation-valid");
       cy.get('#Newsletter').click().should("not.be.checked");
-      cy.get('[name="DateOfBirthDay"]').select(2).invoke('val').should("equal","2");
-      cy.get('[name="DateOfBirthMonth"]').select("August").invoke('val').should("equal","8");
-      cy.get('[name="DateOfBirthYear"]').select("1990").invoke('val').should("equal","1990");
-      cy.get("#Password").type("passoword1234");
-      cy.get("#ConfirmPassword").type("passoword1234");
-      cy.get("[data-valmsg-for='Password']").should("have.class","field-validation-valid");
-      cy.get("[data-valmsg-for='ConfirmPassword']").should("have.class","field-validation-valid");
+      cy.get('[name="DateOfBirthDay"]').select(registrationData.dob_day).invoke('val').should("equal",registrationData.dob_day_val);
+      cy.get('[name="DateOfBirthMonth"]').select(registrationData.dob_mon).invoke('val').should("equal",registrationData.dob_mon_val);
+      cy.get('[name="DateOfBirthYear"]').select(registrationData.dob_year).invoke('val').should("equal",""+registrationData.dob_year_val);
     })
 });
